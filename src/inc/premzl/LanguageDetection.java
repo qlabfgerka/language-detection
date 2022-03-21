@@ -1,13 +1,21 @@
 package inc.premzl;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+
+import static inc.premzl.Files.FileOperations.readFile;
 
 public class LanguageDetection {
     public static void main(String[] args) throws IOException {
-        System.out.println(Files
-                .readString(
-                        Path.of("assets/corps/swedish-Havsboken.txt")));
+        String file = readFile(args[1]);
+        String[] words;
+
+        file = file.replaceAll("[-)(<>\"'„\\.!?,*\\[\\]{}\\\\\\|\\/»«0-9;:—_“”\\n]", "");
+        file = file.replaceAll("[ ]+", " ");
+        //System.out.println(file);
+        words = file.split( " ");
+
+        for(String word : words) {
+            System.out.println(word);
+        }
     }
 }
